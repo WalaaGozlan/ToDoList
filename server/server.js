@@ -11,19 +11,29 @@ app.use(express.urlencoded({extended: true}));
 // app.use(express.static(path.join(__dirname, 'build'))); 
 
 app.get('/allTasks', (req, res) => {
-    res.send("Hello from server!" );
+    var getQuery = 'SELECT * FROM todoapp.tasks';
+    db.query(getQuery, function (err, result) {
+        if (err) console.log("1 record inserted");
+        else res.send(result)
+        
+    })
+    // res.send("Hello from server!" );
   })
+
+
 app.post("/add", (req,res) => {
     // console.log(req.body);
     var addQuery = `INSERT INTO todoapp.tasks (task) VALUES ('${req.body.task}')`;
     db.query(addQuery, function (err, result) {
-        if (err)
-        console.log("1 record inserted");
+        if (err) console.log(err)
+        else console.log("1 record inserted");
     })
     // res.send("post request ")
 })
+
+
 app.listen(port, () => {
     console.log(`Running on port ${port}`)
-    
+
 })
 
