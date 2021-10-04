@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(express.static(path.join(__dirname, 'build'))); 
 
-// app.get('/', (req, res) => {
-//     res.json({ message: "Hello from server!" });
-//   })
+app.get('/allTasks', (req, res) => {
+    res.send("Hello from server!" );
+  })
 app.post("/add", (req,res) => {
     console.log(req.body);
     res.send("post request ")
