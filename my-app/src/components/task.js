@@ -28,8 +28,13 @@ class Task extends React.Component {
         // console.log(task.task);
         axios.post("http://localhost:5000/add", task)
         .then((res)=>{
-            console.log(res)
+            console.log("res")
+           
         })
+
+        this.setState ({
+            task: ""            
+        }) 
     }
 
     render() {
