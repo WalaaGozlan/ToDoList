@@ -26,9 +26,19 @@ app.post("/add", (req,res) => {
     var addQuery = `INSERT INTO todoapp.tasks (task) VALUES ('${req.body.task}')`;
     db.query(addQuery, function (err, result) {
         if (err) console.log(err)
-        else console.log("1 record inserted");
+        else res.send(result)
     })
-    // res.send("post request ")
+    
+})
+
+app.delete("/deleteTask/:id", (req, res) => {
+    console.log(req.params.id);
+    var deleteQuery = `DELETE FROM tasks WHERE taskid = ('${req.params.id}');`;
+    db.query(deleteQuery, function (err, result) {
+        if (err) console.log(err)
+        else res.send(result)
+    })
+    // res.send(res)
 })
 
 
