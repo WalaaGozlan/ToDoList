@@ -41,6 +41,13 @@ app.delete("/deleteTask/:id", (req, res) => {
     // res.send(res)
 })
 
+app.get("/done/:id", (req, res) => {
+    var doneQuery = `SELECT * FROM tasks WHERE taskid = ('${req.params.id}')`;
+    db.query(doneQuery, function (err, result) {
+        if (err) console.log(err)
+        else res.send(result) 
+    })
+})
 
 app.listen(port, () => {
     console.log(`Running on port ${port}`)

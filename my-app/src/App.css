@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.blackButton{
+  background-color: black !important;
+  color: white !important;
+}
+
+.whiteButton{
+  background-color: white !important;
+  color: black !important;
+}
