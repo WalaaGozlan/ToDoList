@@ -46,6 +46,7 @@ app.get("/done/:id", (req, res) => {
     db.query(doneQuery, function (err, result) {
         if (err) console.log(err)
         else res.send(result) 
+        console.log(result)
     })
 })
 
