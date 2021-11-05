@@ -1,37 +1,11 @@
 import React from 'react';
 import axios from "axios";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-
-    // const SingleTask = props => (
-    // //   let btn_class = props.state.black ? "blackButton" : "whiteButton";  
-    // <Card style={{margin:"10px 30px"}} sx={{ maxWidth: 345 }}>
-    //     <CardContent>
-    //         <Typography variant="body2" color="text.secondary">{props.task.task}
-    //         </Typography>
-    //     </CardContent>
-    //     <CardActions>
-    //         <Button className={btn_class} size="small" onClick={() => props.handleDone(props.task.taskid)}>Done</Button>
-    //         <Button size="small" onClick={() => props.handleDelete(props.task.taskid)}>Delete</Button>
-    //     </CardActions>
-    // </Card> 
-    // )
-/*
-<tr>
-    <td>{props.task.material}</td>
-    <td>{props.task.description}</td>
-    <td>{props.task.duration}</td>
-    <td>
-      <Link className="btn btn-warning" to={"/edit/"+props.task._id}>edit</Link> | <a href="/calender" className="btn btn-danger" onClick={() => { props.deleteTask(props.task._id) }}>delete</a>
-    </td>
-  </tr>
-)
- */
-
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+// import Card from '@mui/material/Card';
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
+// import Typography from '@mui/material/Typography';
 
 export default class Task extends React.Component {
     constructor(props){
@@ -117,31 +91,36 @@ export default class Task extends React.Component {
     }
 
     render() {
-        let btn_class = this.state.black ? "blackButton" : "whiteButton";
+        // let btn_class = this.state.black ? "blackButton" : "whiteButton";
       return (
-      <div>
-          <form>
-              <TextField id="filled-basic" label="add a new task" variant="filled" value={this.state.task} onChange={this.handleChange} />
-              <Button style={{top : 10, left : 30 }} variant="contained" onClick={this.handleClick}>ADD</Button>
-                <div  style={{display: "grid", gridTemplateColumns:"auto auto auto"}}>
-                {this.state.tasksList.map((task, index)=>(
-                    // <SingleTask task={task} handleDelete={this.handleDelete} handleDone={this.handleDone} key={index} />
-                <Card style={{margin:"10px 30px"}} sx={{ maxWidth: 345 }} key={index}>
-                    <CardContent>
-                        <Typography variant="body2" color="text.secondary">{task.task}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button className={btn_class} size="small" onClick={() => this.handleDone(task.taskid)}>Done</Button>
-                        <Button size="small" onClick={() => this.handleDelete(task.taskid)}>Delete</Button>
-                        <Button size="small" onClick={() => this.handleUpdate(task.taskid)}>Update</Button>
-                    </CardActions>
-                </Card> 
-                ))}
-                 </div>
-                
-          </form>
-      </div>
+        <div>
+          
+            <form>
+                <input onChange={this.handleChange} type="text" value={this.state.task} className="todo-input" />
+                <button className="todo-button" onClick={this.handleClick}>
+                    <i className="fas fa-plus-square" ></i>
+                </button>
+                <div className="select">
+                    <select name="todos" className="filter-todo">
+                    <option value="all">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+            </form>
+            {this.state.tasksList.map((task, index)=>(
+                <div className="todo-container" key={index}>
+                    <ul className="todo-list" >
+                        <div className="todo">
+                            <li className="todo-item">{task.task}</li>
+                            <button className="complete-btn"><i className="fas fa-check"></i></button>
+                            <button className="trash-btn" onClick={() => this.handleDelete(task.taskid)}><i className="fas fa-trash"></i></button>
+                        </div>
+                    </ul>
+                </div>
+            
+            ))}           
+        </div>
         
       );
       
@@ -149,3 +128,25 @@ export default class Task extends React.Component {
   }
 
 //   export default Task ;
+
+  {/* <form> */}
+              {/* <TextField id="filled-basic" label="add a new task" variant="filled" value={this.state.task} onChange={this.handleChange} />
+              <Button style={{top : 10, left : 30 }} variant="contained" onClick={this.handleClick}>ADD</Button> */}
+                {/* <div  style={{display: "grid", gridTemplateColumns:"auto auto auto"}}> */}
+                {//this.state.tasksList.map((task, index)=>(
+                    // <SingleTask task={task} handleDelete={this.handleDelete} handleDone={this.handleDone} key={index} />
+                // <Card style={{margin:"10px 30px"}} sx={{ maxWidth: 345 }} key={index}>
+                //     <CardContent>
+                //         <Typography variant="body2" color="text.secondary">{task.task}
+                //         </Typography>
+                //     </CardContent>
+                //     <CardActions>
+                //         <Button className={btn_class} size="small" onClick={() => this.handleDone(task.taskid)}>Done</Button>
+                //         <Button size="small" onClick={() => this.handleDelete(task.taskid)}>Delete</Button>
+                //         <Button size="small" onClick={() => this.handleUpdate(task.taskid)}>Update</Button>
+                //     </CardActions>
+                // </Card> 
+                // ))}
+                //  </div>
+                
+            {/* </form> */}}

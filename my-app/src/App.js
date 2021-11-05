@@ -1,18 +1,17 @@
+// import React, {useState} from "react";
 import './App.css';
 import Task from "./components/task";
-// import TaskList from "./components/taskList";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import Form from "./components/todoForm";
 
 function App() {
+  // const [inputText, setInputText] = useState("");
   return (
     <div className="App">
-      <h1>MANAGE YOUR DAY</h1>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Task} />
-          {/* <Route exact path="/task" component={Task} /> */}
-        </Switch>
-      </BrowserRouter>
+        <header>
+          <h1>MANAGE YOUR DAY</h1>
+       </header>
+      <Task />
+      
     </div>
   );
 }
