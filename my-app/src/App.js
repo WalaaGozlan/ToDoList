@@ -1,6 +1,6 @@
 // import React, {useState} from "react";
 import './App.css';
-import Task from "./components/task";
+import Task from "./components/todoList";
 // import Form from "./components/todoForm";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
         <header>
           <h1>MANAGE YOUR DAY</h1>
-       </header>
+        </header>
       <Task />
       
     </div>
