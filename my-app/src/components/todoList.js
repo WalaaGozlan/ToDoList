@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import Todo from './Todo';
 // import TextField from '@mui/material/TextField';
 // import Button from '@mui/material/Button';
 // import Card from '@mui/material/Card';
@@ -7,16 +8,16 @@ import axios from "axios";
 // import CardContent from '@mui/material/CardContent';
 // import Typography from '@mui/material/Typography';
 
-export default class Task extends React.Component {
+export default class TodoList extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            task: "",
-            tasksList: [],
-            black: true
-        };
+        // this.state = {
+        //     task: "",
+        //     tasksList: [],
+        //     black: true
+        // };
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick  = this.handleClick.bind(this);
+        // this.handleClick  = this.handleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleDone   = this.handleDone.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
@@ -30,9 +31,11 @@ export default class Task extends React.Component {
         axios.get("http://localhost:5000/allTasks")
         .then((res)=> res.data )
         .then((res)=>{
-            this.setState({
-                tasksList: res
-            })
+            // console.log(res);
+            this.props.setTodos(res)
+            // this.setState({
+            //     tasksList: res
+            // })
             // console.log("mounting tasks !")
         })   
     }
@@ -44,24 +47,28 @@ export default class Task extends React.Component {
         })   
     }
 
-    handleClick (){
-        const task = {task : this.state.task};
-        // console.log(task);
-        axios.post("http://localhost:5000/add", task)
-        .then((res)=>{           
-        })
-        this.setState ({
-            task: ""            
-        })
-       this.getTask(); 
-    }
+    // handleClick (){
+    //     const task = {task : this.state.task};
+    //     // console.log(task);
+    //     axios.post("http://localhost:5000/add", task)
+    //     .then((res)=>{           
+    //     })
+    //     this.setState ({
+    //         task: ""            
+    //     })
+    //    this.getTask(); 
+    // }
 
 
     handleDelete (id) {
         axios.delete('http://localhost:5000/deleteTask/' + id)
         .then((res) => {
-            // console.log(res)
-        this.getTask();
+            console.log(res)
+        // this.getTask();
+        
+        })
+        this.props.setTodos({
+            todos:this.props.todos.felter(el => el.taskid !== id)
         })
     }
 
@@ -95,7 +102,7 @@ export default class Task extends React.Component {
       return (
         <div>
           
-            <form>
+            {/* <form>
                 <input onChange={this.handleChange} type="text" value={this.state.task} className="todo-input" />
                 <button className="todo-button" onClick={this.handleClick}>
                     <i className="fas fa-plus-square" ></i>
@@ -107,19 +114,23 @@ export default class Task extends React.Component {
                     <option value="uncompleted">Uncompleted</option>
                     </select>
                 </div>
-            </form>
-            {this.state.tasksList.map((task, index)=>(
-                <div className="todo-container" key={index}>
+            </form> */}
+            
+                <div className="todo-container" >
                     <ul className="todo-list" >
-                        <div className="todo">
+                    {this.props.todos.map((todo, index)=>(
+                        
+                        <Todo key={index} todo={todo} handleDelete={this.handleDelete} id={todo.taskid} todos={this.props.todos} setTodos={this.props.setTodos}/>
+                        /* <div className="todo">
                             <li className="todo-item">{task.task}</li>
                             <button className="complete-btn"><i className="fas fa-check"></i></button>
                             <button className="trash-btn" onClick={() => this.handleDelete(task.taskid)}><i className="fas fa-trash"></i></button>
-                        </div>
+                        </div> */
+                        ))} 
                     </ul>
                 </div>
             
-            ))}           
+                     
         </div>
         
       );

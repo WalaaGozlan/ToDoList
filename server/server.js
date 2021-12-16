@@ -23,7 +23,7 @@ app.get('/allTasks', (req, res) => {
 
 app.post("/add", (req,res) => {
     // console.log(req.body);
-    var addQuery = `INSERT INTO todoapp.tasks (task) VALUES ('${req.body.task}')`;
+    var addQuery = `INSERT INTO todoapp.tasks (task, completed) VALUES ('${req.body.task}', '${req.body.completed}')`;
     db.query(addQuery, function (err, result) {
         if (err) console.log(err)
         else res.send(result)
