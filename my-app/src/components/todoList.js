@@ -16,7 +16,7 @@ export default class TodoList extends React.Component {
         //     tasksList: [],
         //     black: true
         // };
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         // this.handleClick  = this.handleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleDone   = this.handleDone.bind(this);
@@ -24,38 +24,43 @@ export default class TodoList extends React.Component {
     }
 
     componentDidMount(){
-        this.getTask()
+        this.props.getTask()
     }
 
-    getTask = () => {    
-        axios.get("http://localhost:5000/allTasks")
-        .then((res)=> res.data )
-        .then((res)=>{
-            // console.log(res);
-            this.props.setTodos(res)
-            // this.setState({
-            //     tasksList: res
-            // })
-            // console.log("mounting tasks !")
-        })   
-    }
+    // getTask = () => {    
+    //     axios.get("http://localhost:5000/allTasks")
+    //     .then((res)=> res.data )
+    //     .then((res)=>{
+    //         console.log(res);
+    //         this.props.setTodos(res)
+    //         // this.setState({
+    //         //     tasksList: res
+    //         // })
+    //         // console.log("mounting tasks !")
+    //     })   
+    // }
     
-    handleChange = (e) => {
-        //  console.log(e.target.value)
-        this.setState ({
-            task: e.target.value 
-        })   
-    }
+    // handleChange = (e) => {
+    //     //  console.log(e.target.value)
+    //     this.setState ({
+    //         task: e.target.value 
+    //     })   
+    // }
 
     // handleClick (){
-    //     const task = {task : this.state.task};
+    //     const task = {task : this.props.inputText, completed: false};;
     //     // console.log(task);
     //     axios.post("http://localhost:5000/add", task)
-    //     .then((res)=>{           
+    //     .then((res)=>{ 
+    //         this.props.setTodos([
+    //                     ...this.props.todos, task
+                        
+    //                 ])          
     //     })
-    //     this.setState ({
-    //         task: ""            
-    //     })
+    //     // this.props.setInputText ({
+    //     //     task: ""            
+    //     // })
+    //     this.props.setInputText ("")
     //    this.getTask(); 
     // }
 
@@ -65,11 +70,12 @@ export default class TodoList extends React.Component {
         .then((res) => {
             console.log(res)
         // this.getTask();
-        
-        })
         this.props.setTodos({
             todos:this.props.todos.felter(el => el.taskid !== id)
+        })    
         })
+        
+        
     }
 
     handleDone (id) {

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 
-const Form = ({setInputText, inputText, todos, setTodos}) =>{
+const Form = ({setInputText, inputText, todos,getTask, setTodos}) =>{
 
     const inputTextHandler = (e) =>{
         console.log(e.target.value)
@@ -25,7 +25,7 @@ const Form = ({setInputText, inputText, todos, setTodos}) =>{
         
          
         setInputText("")
-    //    this.getTask(); 
+         getTask(); 
     }
 
     return(

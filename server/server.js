@@ -35,6 +35,7 @@ app.delete("/deleteTask/:id", (req, res) => {
     console.log(req.params.id);
     var deleteQuery = `DELETE FROM tasks WHERE taskid = ('${req.params.id}');`;
     db.query(deleteQuery, function (err, result) {
+        console.log(result)
         if (err) console.log(err)
         else res.send(result)
     })
