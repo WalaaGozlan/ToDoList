@@ -69,10 +69,10 @@ export default class TodoList extends React.Component {
         axios.delete('http://localhost:5000/deleteTask/' + id)
         .then((res) => {
             console.log(res)
-        // this.getTask();
-        this.props.setTodos({
-            todos:this.props.todos.felter(el => el.taskid !== id)
-        })    
+        this.props.getTask();
+        // this.props.setTodos({
+        //     todos:this.props.todos.felter(el => el.taskid !== id)
+        // })    
         })
         
         
